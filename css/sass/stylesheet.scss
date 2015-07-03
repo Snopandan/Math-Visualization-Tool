@@ -1,0 +1,67 @@
+$primaryColor: #fdf6e3;
+$sencondaryColor: #31302e;
+$footerHeight: 30px;
+$headerHeight: 65px;
+$sidebarWidth: 300px;
+$footerBorder: 1px;
+$footerPadding: 8px;
+$headerBorder: 1px;
+$headerPadding: 8px;
+
+html, body {
+  color: white;
+  margin: 0px;
+  padding: 0px;
+  min-height: 100%;
+  height: 100%;
+}
+
+#wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -1*$footerHeight;
+    position: relative
+}
+
+#footer {
+    height: $footerHeight;
+}
+
+#footer-content {
+    border: 1px solid $sencondaryColor;
+    height: $footerHeight - ($footerPadding + $headerPadding) - ($footerBorder + $headerBorder);
+    padding: 8px;
+    background-color: $sencondaryColor;
+    text-align: right;
+}
+
+#header {
+    height: $headerHeight;
+}
+
+#header-content {
+    vertical-align: top;
+    border: 1px solid $sencondaryColor;
+    height: $headerHeight - ($footerPadding + $headerPadding) - ($footerBorder + $headerBorder);
+    padding: 8px;
+    background-color: $sencondaryColor;
+}
+
+#content {
+    height: 100%;
+}
+
+#sidebar {
+    border: 1px solid $sencondaryColor;
+    width: $sidebarWidth;
+    position: absolute;
+    left: 0;
+    top: $headerHeight;
+    bottom: $footerHeight;
+    background-color: $sencondaryColor;
+}
+
+#main {
+    margin-left: $sidebarWidth;
+}

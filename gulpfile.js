@@ -5,16 +5,19 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var rimraf = require('rimraf');
 var copy = require('gulp-copy');
+var sass = require('gulp-sass');
+var rename = require('gulp-rename');
+var minifyCss = require('gulp-minify-css');
 
 var inputFiles = {
-  js: ['./js/**/*.js', '!./js/lib/**']
+  js: ['./js/**/*.js', '!./js/lib/**', '!./js/mvt.min.js']
 };
 
 var outputFiles = {
   js: './js'
 };
 
-var jsOutputFileName = 'mvt.min.js';
+var jsOutputFileName = 'build/mvt.min.js';
 
 gulp.task('build-js', ['clean'], function() {
   return gulp.src(inputFiles.js)
@@ -33,11 +36,24 @@ gulp.task('watch', function() {
   gulp.watch(inputFiles.js, ['build-js']);
 });
 
-var copyFiles =  ['index.html', './js**'];
-var copyDestination = '/opt/lampp/htdocs';
+var copyFiles =  ['index.html', './js/**'];
+var copyDestination = '/opt/lampp/htdocs/';
 gulp.task('copy-to-htdocs', function() {
   return gulp.src(copyFiles)
     .pipe(copy(copyDestination));
 });
 
-gulp.task('default', ['build-js', 'copy-to-htdocs',  'watch']);
+var sassFiles = ['css/sass/**'];
+var cssOutputDirectory = 'css/build/';
+gulp.task('compileSass', function() {
+  gulp.src(sassFiles)
+        .pipe(sass())
+        .pipe(gulp.dest('css/build'))
+        .pipe(concat(cssOutputDirectory + 'style.css'))
+        .pipe(gulp.dest('./'))
+        .pipe(minifyCss())
+        .pipe(rename(cssOutputDirectory+ 'style.min.css'))
+        .pipe(gulp.dest('./'));
+});
+
+gulp.task('default', ['build-js', 'compileSass']);
