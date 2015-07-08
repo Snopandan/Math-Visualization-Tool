@@ -31,12 +31,12 @@ graphics.factory('Vector', function() {
 
   var Vector = function(spec) {
     this.vector = new THREE.Vector3();
-    this.vector.fromArray(spec.vector || [1, 1, 1]);
+    this.vector.fromArray('vector' in spec ? spec.vector : [1, 1, 1]);
     this.currentVector = new THREE.Vector3();
     this.currentVector.copy(this.vector);
-    this.color = spec.color || 0xff0000;
-    this.width = spec.width || 0.01;
-    this.length = spec.length || 1;
+    this.color = 'color' in spec ? spec.color : 0xff0000;
+    this.width = 'width' in spec ? spec.width : 0.01;
+    this.length = 'length' in spec ? spec.length : 1;
     this.object = create(this.vector, this.width, this.length, this.color);
 
     this.goalVector = new THREE.Vector3(0,0,0);
