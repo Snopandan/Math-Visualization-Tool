@@ -9,13 +9,6 @@ graphics.factory('Axis', ['Vector', function(Vector) {
       axis.add(yAxis.object);
       axis.add(zAxis.object);
 
-      xAxis.animate();
-      xAxis.update();
-      yAxis.animate();
-      yAxis.update();
-      zAxis.animate();
-      zAxis.update();
-
       return axis;
     }
   };
