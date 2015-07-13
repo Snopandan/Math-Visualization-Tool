@@ -1,10 +1,10 @@
 function RenderWindow(Vector, Axis, Plane) {
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera( 75, 1 / 1, 0.1, 1000 );
-  var controls = new THREE.OrbitControls( camera );
   camera.position.set(2,4,5);
   var renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setClearColor( 0xfdf6e3, 1 );
+  var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
   scene.add(Plane.create());
   scene.add(Axis.create(5));
@@ -41,6 +41,10 @@ function RenderWindow(Vector, Axis, Plane) {
 
   this.renderStart = function() {
     render();
+  };
+
+  this.add = function(object) {
+    scene.add(object);
   };
 }
 
