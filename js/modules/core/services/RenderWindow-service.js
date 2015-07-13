@@ -6,8 +6,10 @@ function RenderWindow(Vector, Axis, Plane) {
   renderer.setClearColor( 0xfdf6e3, 1 );
   var controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-  scene.add(Plane.create());
-  scene.add(Axis.create(5));
+  var plane = Plane();
+  scene.add(plane.getObject());
+  var axis = Axis();
+  scene.add(axis.getObject());
 
   var directionalLight1 = new THREE.DirectionalLight( 0xffffff, 1.0 );
   directionalLight1.position.set( 1, 1, 1 );

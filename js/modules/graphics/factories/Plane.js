@@ -1,7 +1,5 @@
 graphics.factory('Plane', function() {
-  return {
-    create: function(){
-
+    function create() {
       var gridGeometry = new THREE.Geometry();
       var gridMaterial = new THREE.LineBasicMaterial({color: 0x2aa198});
       var gridSize = 10;
@@ -25,5 +23,20 @@ graphics.factory('Plane', function() {
       lines.add(plane);
       return lines;
     }
-  };
+
+    var Plane = function(spec) {
+      spec = spec || {};
+
+      var that = {};
+
+      var object = create();
+
+      that.getObject = function() {
+        return object;
+      };
+
+      return that;
+    };
+
+    return Plane;
 });

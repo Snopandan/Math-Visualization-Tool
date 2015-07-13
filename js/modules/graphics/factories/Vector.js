@@ -30,38 +30,59 @@ graphics.factory('Vector', function() {
   }
 
   var Vector = function(spec) {
-    this.vector = new THREE.Vector3();
-    this.vector.fromArray('vector' in spec ? spec.vector : [1, 1, 1]);
-    this.currentVector = new THREE.Vector3();
-    this.currentVector.copy(this.vector);
-    this.color = 'color' in spec ? spec.color : 0xff0000;
-    this.width = 'width' in spec ? spec.width : 0.01;
-    this.length = 'length' in spec ? spec.length : 1;
-    this.object = create(this.vector, this.width, this.length, this.color);
+    spec = spec || {};
+    var defaults = {
+      vector: [1, 1, 1],
+      width: 0.01,
+      length: 1,
+      color: 0xff0000
+    };
 
-    this.goalVector = new THREE.Vector3(0,0,0);
-    this.animationSpeed = 0;
-    this.animationStep = 0;
-  };
+    var that = {};
+    var vector = new THREE.Vector3();
+    vector.fromArray('vector' in spec ? spec.vector : [1, 1, 1]);
+    var currentVector = new THREE.Vector3();
+    currentVector.copy(vector);
+    var color = 'color' in spec ? spec.color : 0xff0000;
+    var width = 'width' in spec ? spec.width : 0.01;
+    var length = 'length' in spec ? spec.length : 1;
+    var object = create(vector, width, length, color);
 
-  Vector.prototype.setAnimationProperties = function(params) {
-    this.goalVector.fromArray(params.vector || [1, 1, 1]);
-    this.animationSpeed = 'speed' in params ? params.speed : 0.01;
-  };
+    var goalVector = new THREE.Vector3(0,0,0);
+    var animationSpeed = 0;
+    var animationStep = 0;
 
-  Vector.prototype.animate = function() {
-    if (this.animationSpeed === 0) {
-        return;
-    }
+    that.setAnimationProperties = function(params) {
+      params = params || {};
+      var defaults = {
+        vector: [1, 1, 1],
+        speed: 0.01
+      };
 
-    this.animationStep += this.animationSpeed;
-    this.animationStep = this.animationStep >= 1 ? 1 : this.animationStep;
-    var lerpVector = new THREE.Vector3();
-    lerpVector.lerpVectors(this.vector, this.goalVector, this.animationStep);
+      goalVector.fromArray('vector' in params ? params.vector : defaults.vector);
+      animationSpeed = 'speed' in params ? params.speed : defaults.speed;
+    };
 
-    var rotation = computeRotation(this.currentVector, lerpVector);
-    this.currentVector.copy(lerpVector);
-    this.object.rotateOnAxis(rotation.axis, rotation.angle);
+    that.animate = function() {
+      if (animationSpeed === 0) {
+          return;
+      }
+
+      animationStep += animationSpeed;
+      animationStep = animationStep >= 1 ? 1 : animationStep;
+      var lerpVector = new THREE.Vector3();
+      lerpVector.lerpVectors(vector, goalVector, animationStep);
+
+      var rotation = computeRotation(currentVector, lerpVector);
+      currentVector.copy(lerpVector);
+      object.rotateOnAxis(rotation.axis, rotation.angle);
+    };
+
+    that.getObject = function() {
+      return object;
+    };
+
+    return that;
   };
 
   return Vector;
