@@ -1,7 +1,7 @@
-graphics.factory('Vector', function() {
+graphics.factory('Vector', [ 'Vec3', function(Vec3) {
 
   function create(vector, width, height, color) {
-    var defaultVector = new THREE.Vector3(0,1,0);
+    var defaultVector = Vec3(0,1,0);
 
     var bodyGeometry = new THREE.CylinderGeometry(width, width, height, 50, 50, false);
     var bodyMaterial = new THREE.MeshPhongMaterial( { color: color} );
@@ -14,8 +14,8 @@ graphics.factory('Vector', function() {
     head.position.y = height/2;
     body.add(head);
 
-    var rotation = computeRotation(defaultVector, vector);
-    body.rotateOnAxis(rotation.axis, rotation.angle);
+    var rotation = defaultVector.angleTo(vector);
+    body.rotateOnAxis(rotation.axis.getObject(), rotation.angle);
 
     return body;
   }
@@ -32,34 +32,31 @@ graphics.factory('Vector', function() {
   var Vector = function(spec) {
     spec = spec || {};
     var defaults = {
-      vector: [1, 1, 1],
+      vector: Vec3(1, 1, 1),
       width: 0.01,
       length: 1,
       color: 0xff0000
     };
 
     var that = {};
-    var vector = new THREE.Vector3();
-    vector.fromArray('vector' in spec ? spec.vector : [1, 1, 1]);
-    var currentVector = new THREE.Vector3();
-    currentVector.copy(vector);
+    var vector = 'vector' in spec ? spec.vector : defaults.vector;
+    var currentVector = Vec3(vector.x(), vector.y(), vector.z());
     var color = 'color' in spec ? spec.color : 0xff0000;
     var width = 'width' in spec ? spec.width : 0.01;
     var length = 'length' in spec ? spec.length : 1;
     var object = create(vector, width, length, color);
 
-    var goalVector = new THREE.Vector3(0,0,0);
+    var goalVector = Vec3(0,0,0);
     var animationSpeed = 0;
     var animationStep = 0;
 
     that.setAnimationProperties = function(params) {
       params = params || {};
       var defaults = {
-        vector: [1, 1, 1],
+        vector: Vec3(1, 1, 1),
         speed: 0.01
       };
-
-      goalVector.fromArray('vector' in params ? params.vector : defaults.vector);
+      goalVector.copy('vector' in params ? params.vector : defaults.vector);
       animationSpeed = 'speed' in params ? params.speed : defaults.speed;
     };
 
@@ -70,11 +67,36 @@ graphics.factory('Vector', function() {
 
       animationStep += animationSpeed;
       animationStep = animationStep >= 1 ? 1 : animationStep;
-      var lerpVector = new THREE.Vector3();
+      animationStep = 1;
+      // console.log(animationStep);
+      var lerpVector = Vec3(0, 0, 0);
       lerpVector.lerpVectors(vector, goalVector, animationStep);
-
-      var rotation = computeRotation(currentVector, lerpVector);
+      // var rotation = currentVector.angleTo(lerpVector);
+      var rotation = computeRotation(currentVector.getObject(), lerpVector.getObject());
+      // console.log("currentVector = "+ currentVector.x() + " " + currentVector.y() + " " + currentVector.z());
       currentVector.copy(lerpVector);
+      console.log("lerpVector = "+ lerpVector.x + " " + lerpVector.y + " " + lerpVector.z);
+      console.log("rotation axis = "+ rotation.axis.x + " " + rotation.axis.y + " " + rotation.axis.z);
+      console.log("rotation.angle = " + rotation.angle);
+
+      // var axis = new THREE.Vector3();
+      // axis.crossVectors(currentVector.getObject(), lerpVector.getObject());
+      // axis.normalize();
+      // var v1 = new THREE.Vector3();
+      // v1.copy(currentVector.getObject());
+      // v1.normalize();
+      // var v2 = new THREE.Vector3();
+      // v2.copy(lerpVector.getObject());
+      // v2.normalize();
+      // var prod = v1.dot(v2);
+      // var angle = Math.acos(prod);
+      // console.log('prod = ' + prod);
+      // console.log('angle = ' + angle);
+
+      // var v1 = Vec3(1, 1, 1);
+      // var v2 = Vec3(1, 0, 1);
+      // var angle = v1.angleTo(v2).angle;
+      // console.log("angle = " + angle);
       object.rotateOnAxis(rotation.axis, rotation.angle);
     };
 
@@ -86,4 +108,4 @@ graphics.factory('Vector', function() {
   };
 
   return Vector;
-});
+}]);

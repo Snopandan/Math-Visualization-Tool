@@ -1,1 +1,1 @@
-var core = angular.module('core', ['graphics']);
+var core = angular.module('core', ['graphics', 'math']);

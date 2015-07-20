@@ -1,1 +1,1 @@
-var graphics = angular.module('graphics', []);
+var graphics = angular.module('graphics', ['math']);

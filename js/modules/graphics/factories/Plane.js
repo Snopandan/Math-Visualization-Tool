@@ -1,5 +1,5 @@
-graphics.factory('Plane', function() {
-    function create() {
+graphics.factory('Plane', ['Vec3', 'Vector', function(Vec3, Vector) {
+    function create(normal, showNormal) {
       var gridGeometry = new THREE.Geometry();
       var gridMaterial = new THREE.LineBasicMaterial({color: 0x2aa198});
       var gridSize = 10;
@@ -21,6 +21,13 @@ graphics.factory('Plane', function() {
       plane.position.set(0,0,0);
 
       lines.add(plane);
+
+      var defaultNormal = Vec3(0, 1, 0);
+      var rotation = defaultNormal.angleTo(normal);
+      lines.rotateOnAxis(rotation.axis.getObject(), rotation.angle);
+
+      var normalObject = Vector({normal: normal});
+      // lines.add(normalObject.getObject());
       return lines;
     }
 
@@ -29,7 +36,14 @@ graphics.factory('Plane', function() {
 
       var that = {};
 
-      var object = create();
+      var defaults = {
+        normal: Vec3(0, 1, 0),
+        showNormal: false
+      };
+
+      var normal = 'normal' in spec ? spec.normal : defaults.normal;
+      var showNormal = 'showNormal' in spec? spec.showNormal: defaults.showNormal;
+      var object = create(normal, showNormal);
 
       that.getObject = function() {
         return object;
@@ -39,4 +53,4 @@ graphics.factory('Plane', function() {
     };
 
     return Plane;
-});
+}]);

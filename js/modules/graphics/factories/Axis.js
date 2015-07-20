@@ -1,9 +1,9 @@
-graphics.factory('Axis', ['Vector', function(Vector) {
+graphics.factory('Axis', ['Vec3', 'Vector', function(Vec3, Vector) {
     function create(size, width, xColor, yColor, zColor) {
       var axis = new THREE.Mesh();
-      var xAxis = Vector({vector: [1, 0, 0], width: width, length: size, color: xColor});
-      var yAxis = Vector({vector: [0, 1, 0], width: width, length: size, color: yColor});
-      var zAxis = Vector({vector: [0, 0, 1], width: width, length: size, color: zColor});
+      var xAxis = Vector({vector: Vec3(1, 0, 0), width: width, length: size, color: xColor});
+      var yAxis = Vector({vector: Vec3(0, 1, 0), width: width, length: size, color: yColor});
+      var zAxis = Vector({vector: Vec3(0, 0, 1), width: width, length: size, color: zColor});
       axis.add(xAxis.getObject());
       axis.add(yAxis.getObject());
       axis.add(zAxis.getObject());
