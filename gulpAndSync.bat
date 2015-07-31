@@ -1,0 +1,1 @@
+gulp && D:\Software\FreeFileSync\FreeFileSync.exe mvt.ffs_batch
