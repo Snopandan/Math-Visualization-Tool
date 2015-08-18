@@ -13,6 +13,12 @@ core.factory('Scene', function() {
       return scene;
     };
 
+    that.clear = function() {
+      for (var i = scene.children.length - 1; i >= 0; i--) {
+        scene.remove(scene.children[i]);
+      }
+    };
+
     return that;
   };
 
