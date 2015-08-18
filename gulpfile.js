@@ -8,6 +8,7 @@ var copy = require('gulp-copy');
 var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var minifyCss = require('gulp-minify-css');
+var jsonCombine = require('gulp-jsoncombine');
 
 var inputFiles = {
   js: ['./js/**/*.js', '!./js/lib/**', '!./js/mvt.min.js']
@@ -56,4 +57,12 @@ gulp.task('compileSass', function() {
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('default', ['build-js', 'compileSass']);
+gulp.task('combineJson', function() {
+  gulp.src("js/json/visualizations/*.json")
+  .pipe(jsonCombine("visualizations.json",function(data){
+      return new Buffer(JSON.stringify(data));
+   }))
+   .pipe(gulp.dest("./js/build"));
+});
+
+gulp.task('default', ['build-js', 'compileSass', 'combineJson']);
