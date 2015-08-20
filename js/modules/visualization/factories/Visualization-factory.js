@@ -1,4 +1,4 @@
-core.factory('Visualization', ['Scene', function(Scene) {
+visualization.factory('Visualization', ['Scene', function(Scene) {
 
   var Visualization = function() {
     var that = {};
