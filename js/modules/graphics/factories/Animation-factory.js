@@ -1,4 +1,4 @@
-graphics.factory('Animation', function() {
+GraphicsModule.factory('Animation', function() {
 
   var Animation = function(from, target, onUpdate, spec) {
     spec = spec || {};

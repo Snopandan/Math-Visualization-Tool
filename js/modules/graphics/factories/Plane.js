@@ -1,4 +1,4 @@
-graphics.factory('Plane', ['Vec3', 'Vector', function(Vec3, Vector) {
+GraphicsModule.factory('Plane', ['Vec3', 'Vector', function(Vec3, Vector) {
     function create(normal, showNormal, size, gridStep) {
       var gridGeometry = new THREE.Geometry();
       var gridMaterial = new THREE.LineBasicMaterial({color: 0x2aa198});
@@ -23,7 +23,7 @@ graphics.factory('Plane', ['Vec3', 'Vector', function(Vec3, Vector) {
       var defaultNormal = Vec3(0, 1, 0);
       var rotation = defaultNormal.angleTo(normal);
       lines.rotateOnAxis(rotation.axis.getObject(), rotation.angle);
-      
+
       return lines;
     }
 

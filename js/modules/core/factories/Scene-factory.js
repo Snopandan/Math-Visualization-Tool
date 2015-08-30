@@ -1,4 +1,4 @@
-core.factory('Scene', function() {
+CoreModule.factory('Scene', function() {
 
   var Scene = function() {
     var that = {};

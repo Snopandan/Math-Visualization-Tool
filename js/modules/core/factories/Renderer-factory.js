@@ -1,4 +1,4 @@
-core.factory('Renderer', function() {
+CoreModule.factory('Renderer', function() {
 
   var Renderer = function(spec) {
     spec = spec || {};

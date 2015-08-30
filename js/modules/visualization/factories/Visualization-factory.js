@@ -1,17 +1,50 @@
-visualization.factory('Visualization', ['Scene', function(Scene) {
+VisualizationModule.factory('Visualization', ['Scene', function(Scene) {
 
   var Visualization = function() {
     var that = {};
 
     var name = '';
     var scene = Scene();
-    var stageDescriptions = [];
-    var stageCallbacks = [];
+    var stages = [];
     var numberOfStages = 0;
+    var currentStage = 0;
 
-    that.addStage = function(description, callback) {
-      stageDescriptions.push(description);
-      stageCallbacks.push(callback);
+    function addAllFromStage(stage) {
+      var numberOfObjects = stage.getNumberOfObjects();
+      for (var i = 0; i < numberOfObjects; i++) {
+        scene.add(stage.getObject(i));
+      }
+    }
+
+    that.init = function() {
+      addAllFromStage(stages[0]);
+    };
+
+    that.nextStage = function() {
+      currentStage++;
+      if (!stages[currentStage].shouldInherit()) {
+        scene.clear();
+      }
+      addAllFromStage(stages[currentStage]);
+    };
+
+    that.previousStage = function() {
+      currentStage--;
+      that.setStage(currentStage);
+    };
+
+    that.setStage = function(stageNumber) {
+      that.clearScene();
+      currentStage = 0;
+
+      that.init();
+      for (var i = 0; i < stageNumber; i++) {
+        that.nextStage();
+      }
+    };
+
+    that.addStage = function(stage) {
+      stages.push(stage);
       numberOfStages++;
     };
 
@@ -19,12 +52,8 @@ visualization.factory('Visualization', ['Scene', function(Scene) {
       return numberOfStages;
     };
 
-    that.getDescription = function(index) {
-      return stageDescriptions[index - 1];
-    };
-
-    that.getCallback = function(index) {
-      return stageCallbacks[index - 1];
+    that.getCurrentDescription = function() {
+      return stages[currentStage].getDescription();
     };
 
     that.setName = function(n) {
@@ -33,10 +62,6 @@ visualization.factory('Visualization', ['Scene', function(Scene) {
 
     that.getName = function() {
       return name;
-    };
-
-    that.add = function(object) {
-      scene.add(object);
     };
 
     that.getScene = function() {

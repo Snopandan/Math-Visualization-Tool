@@ -1,4 +1,4 @@
-core.directive('mvtSite', ['MultiTransclude', function(MultiTransclude) {
+CoreModule.directive('mvtSite', ['MultiTransclude', function(MultiTransclude) {
   return {
     restrict: 'E',
     scope: {},

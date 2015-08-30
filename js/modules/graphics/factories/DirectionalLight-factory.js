@@ -1,4 +1,4 @@
-core.factory('DirectionalLight', ['Vec3', function(Vec3) {
+GraphicsModule.factory('DirectionalLight', ['Vec3', function(Vec3) {
 
   var DirectionalLight = function(spec) {
     spec = spec || {};
@@ -7,7 +7,7 @@ core.factory('DirectionalLight', ['Vec3', function(Vec3) {
     var defaults = {
       color: 0xffffff,
       intensity: 1.0,
-      position: Vec3(0, 0, 0)
+      position: Vec3(1, 1, 1)
     };
     var color = 'color' in spec ? spec.color : defaults.color;
     var intensity = 'intensity' in spec ? spec.intensity : defaults.intensity;

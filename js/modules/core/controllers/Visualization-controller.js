@@ -1,30 +1,65 @@
-function VisualizationCtrl(Visualization) {
+function VisualizationCtrl($http, RenderWindow, VisualizationCollection, ExpressionParser) {
   var that = this;
-  var viz = Visualization();
-  viz.addStage('hej från stage1 description', function() {
-    console.log('hej från stage1 callback');
-  });
 
-  viz.addStage('hej från stage2 description', function() {
-    console.log('hej från stage2 callback');
-  });
+  var ep = ExpressionParser();
+  var fun = ep.parse('x^2 + y^2', ['x', 'y']);
+  console.log('x = 0, y = 0: ' + fun(0,0));
+  console.log('x = 1, y = 1: ' + fun(1,1));
+  console.log('x = 3, y = 3: ' + fun(3,3));
 
-  var currentVisualization = viz;
   that.currentStage = 1;
-  that.finalStage = getFinalStageNumber();
-  that.currentDescription = getCurrentDescription();
-  callCurrentCallback();
+  that.finalStage = 1;
+  that.name = "";
+  that.visualizationIds = [];
+  that.currentVisualizationId = 0;
+  that.visualizations = [];
+  var currentVisualization;
+
+  that.changeCurrentVisualization = function() {
+    currentVisualization = that.visualizations[that.currentVisualizationId];
+    currentVisualization.setStage(0);
+    RenderWindow.setScene(currentVisualization.getScene());
+
+    that.finalStage = currentVisualization.getNumberOfStages();
+
+    that.name = currentVisualization.getName();
+    that.currentDescription = currentVisualization.getCurrentDescription();
+    that.currentStage = 1;
+  };
+
+  var collection = VisualizationCollection();
+  collection.fetch(function(visualizations, numberOfVisualizations) {
+    console.log(numberOfVisualizations);
+    console.log(visualizations);
+
+    for (var i in visualizations) {
+      that.visualizationIds.push({id: i, name: visualizations[i].getName()});
+    }
+
+    that.visualizations = visualizations;
+    that.changeCurrentVisualization();
+
+  });
+  // var visualization = collection.getVisualizations();
+  // var currentVisualization = visualization[0];
+  // that.currentStage = 1;
+  // that.finalStage = getFinalStageNumber();
+  // that.name = currentVisualization.getName();
+  // that.currentDescription = getCurrentDescription();
+  // callCurrentCallback();
+  //
+  // RenderWindow.setScene(currentVisualization.getScene());
 
   that.next = function() {
+    currentVisualization.nextStage();
+    that.currentDescription = currentVisualization.getCurrentDescription();
     that.currentStage++;
-    that.currentDescription = getCurrentDescription();
-    callCurrentCallback();
   };
 
   that.previous = function() {
+    currentVisualization.previousStage();
+    that.currentDescription = currentVisualization.getCurrentDescription();
     that.currentStage--;
-    that.currentDescription = getCurrentDescription();
-    callCurrentCallback();
   };
 
   function getCurrentDescription() {
@@ -40,4 +75,4 @@ function VisualizationCtrl(Visualization) {
   }
 }
 
-core.controller('VisualizationCtrl', ['Visualization', VisualizationCtrl]);
+CoreModule.controller('VisualizationCtrl', ['$http', 'RenderWindow', 'VisualizationCollection', 'ExpressionParser', VisualizationCtrl]);

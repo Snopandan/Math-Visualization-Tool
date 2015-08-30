@@ -37,11 +37,12 @@ html, body {
 }
 
 #header {
+    vertical-align: text-top;
     height: $headerHeight;
 }
 
 #header-content {
-    vertical-align: top;
+    vertical-align: text-top;
     border: 1px solid $sencondaryColor;
     height: $headerHeight - ($footerPadding + $headerPadding) - ($footerBorder + $headerBorder);
     padding: 8px;

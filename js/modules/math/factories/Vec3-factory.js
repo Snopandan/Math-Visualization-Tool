@@ -1,4 +1,4 @@
-math.factory('Vec3', function() {
+MathModule.factory('Vec3', function() {
   function Vec3(x, y, z) {
     var that = {};
 

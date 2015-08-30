@@ -1,4 +1,4 @@
-core.factory('MultiTransclude', function() {
+CoreModule.factory('MultiTransclude', function() {
   return {
     transclude: function(element, transcludeFunction) {
       transcludeFunction(function(clone) {

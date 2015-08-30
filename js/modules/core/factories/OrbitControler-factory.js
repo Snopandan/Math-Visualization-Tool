@@ -1,4 +1,4 @@
-core.factory('OrbitControler', ['PerspectiveCamera', function(PerspectiveCamera) {
+CoreModule.factory('OrbitControler', ['PerspectiveCamera', function(PerspectiveCamera) {
 
   var OrbitControler = function(spec) {
     spec = spec || {};

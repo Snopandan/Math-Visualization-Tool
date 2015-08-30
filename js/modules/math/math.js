@@ -1,1 +1,1 @@
-var math = angular.module('math', []);
+var MathModule = angular.module('MathModule', []);

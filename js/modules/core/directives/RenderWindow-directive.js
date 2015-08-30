@@ -1,4 +1,4 @@
-core.directive('renderWindow', ['RenderWindow' , '$window', function(RenderWindow, $window) {
+CoreModule.directive('renderWindow', ['RenderWindow' , '$window', function(RenderWindow, $window) {
   return {
     restrict: 'E',
     scope: {},

@@ -1,4 +1,4 @@
-core.factory('PerspectiveCamera', ['Vec3', function(Vec3) {
+CoreModule.factory('PerspectiveCamera', ['Vec3', function(Vec3) {
 
   var PerspectiveCamera = function(spec) {
     spec = spec || {};

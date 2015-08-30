@@ -1,4 +1,4 @@
-graphics.factory('Axis', ['Vec3', 'Vector', function(Vec3, Vector) {
+GraphicsModule.factory('Axis', ['Vec3', 'Vector', function(Vec3, Vector) {
     function create(size, width, xColor, yColor, zColor) {
       var axis = new THREE.Mesh();
       var xAxis = Vector({vector: Vec3(1, 0, 0), width: width, length: size, color: xColor});

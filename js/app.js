@@ -1,1 +1,1 @@
-var mathVisualizationTool = angular.module('mathVisualizationTool', ['core']);
+var mathVisualizationTool = angular.module('mathVisualizationTool', ['CoreModule']);
