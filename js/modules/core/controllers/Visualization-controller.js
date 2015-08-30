@@ -1,11 +1,5 @@
-function VisualizationCtrl($http, RenderWindow, VisualizationCollection, ExpressionParser) {
+function VisualizationCtrl($http, RenderWindow, VisualizationCollection) {
   var that = this;
-
-  var ep = ExpressionParser();
-  var fun = ep.parse('x^2 + y^2', ['x', 'y']);
-  console.log('x = 0, y = 0: ' + fun(0,0));
-  console.log('x = 1, y = 1: ' + fun(1,1));
-  console.log('x = 3, y = 3: ' + fun(3,3));
 
   that.currentStage = 1;
   that.finalStage = 1;
@@ -40,15 +34,6 @@ function VisualizationCtrl($http, RenderWindow, VisualizationCollection, Express
     that.changeCurrentVisualization();
 
   });
-  // var visualization = collection.getVisualizations();
-  // var currentVisualization = visualization[0];
-  // that.currentStage = 1;
-  // that.finalStage = getFinalStageNumber();
-  // that.name = currentVisualization.getName();
-  // that.currentDescription = getCurrentDescription();
-  // callCurrentCallback();
-  //
-  // RenderWindow.setScene(currentVisualization.getScene());
 
   that.next = function() {
     currentVisualization.nextStage();
@@ -75,4 +60,4 @@ function VisualizationCtrl($http, RenderWindow, VisualizationCollection, Express
   }
 }
 
-CoreModule.controller('VisualizationCtrl', ['$http', 'RenderWindow', 'VisualizationCollection', 'ExpressionParser', VisualizationCtrl]);
+CoreModule.controller('VisualizationCtrl', ['$http', 'RenderWindow', 'VisualizationCollection', VisualizationCtrl]);
