@@ -1,21 +1,16 @@
-MathModule.factory('Expression', ['ExpressionParser', function(ExpressionParser) {
-  var Expression = function(spec) {
-    spec = spec || {};
+MathModule.factory('Expression', [function() {
+  var Expression = function(expression) {
     var that = {};
 
-    var defaults = {
-      expression: '',
-      variables: [],
-      parameters: []
+    var expressionObject = Parser.parse(expression);
+
+    that.eval = function(variables) {
+      return expressionObject.evaluate(variables);
     };
 
-    var expression = 'expression' in spec ? spec.expression : defaults.expression;
-    var variables = 'variables' in spec ? spec.variables : defaults.variables;
-    var parameters = 'parameters' in spec ? spec.parameters : defaults.parameters;
-
-    var parser = ExpressionParser();
-
-    
+    that.getJsFunction = function(variables) {
+      return expressionObject.toJSFunction(variables);
+    };
 
     return that;
   };
