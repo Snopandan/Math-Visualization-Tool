@@ -6,24 +6,15 @@
     <link rel="stylesheet" type="text/css" href="css/build/style.min.css">
   </head>
   <body ng-controller="VisualizationCtrl as viz">
-    <div>
-  </div>
     <mvt-site >
-      <div transclude-to="header">
-        <select ng-model="viz.currentVisualizationId" ng-change="viz.changeCurrentVisualization()" >
-          <option ng-repeat="vizualization in viz.visualizationIds" value="{{vizualization.id}}">{{vizualization.name}}</option>
-        </select>
-      </div>
       <div transclude-to="main"><render-window></render-window></div>
-      <div transclude-to="sidebar">
-        <h3>{{viz.name}}</h3>
-        <hr>
-        <div ng-bind-html="viz.currentDescription | SanitizeHtml"></div>
-        <button ng-disabled="viz.currentStage === 1" ng-click="viz.previous()">Previous</button>
-        {{viz.currentStage}} / {{viz.finalStage}}
-        <button ng-disabled="viz.currentStage === viz.finalStage" ng-click="viz.next()">Next</button>
+      <div transclude-to="gui-content">
+        <gui-component next-callback="viz.next" previous-callback="viz.previous" title="viz.name" current-stage="viz.currentStage" max-stage="viz.finalStage">
+          <div transclude-to="content">
+            <div ng-bind-html="viz.currentDescription | SanitizeHtml"></div>
+          </div>
+        </gui-component>
       </div>
-      <div transclude-to="footer"></div>
     </mvt-site>
     <!--<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>

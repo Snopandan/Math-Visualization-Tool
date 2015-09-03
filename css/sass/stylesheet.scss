@@ -1,12 +1,9 @@
 $primaryColor: #fdf6e3;
 $sencondaryColor: #31302e;
-$footerHeight: 30px;
-$headerHeight: 65px;
-$sidebarWidth: 300px;
-$footerBorder: 1px;
-$footerPadding: 8px;
-$headerBorder: 1px;
-$headerPadding: 8px;
+$textColor: #ffffff;
+$guiOpacity: 0.8;
+$buttonDivider: 10px;
+$buttonRadius: 50px;
 
 html, body {
   color: white;
@@ -14,55 +11,122 @@ html, body {
   padding: 0px;
   min-height: 100%;
   height: 100%;
+  overflow:hidden;
 }
 
-#wrapper {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin: 0 auto -1*$footerHeight;
-    position: relative
+.gui {
+  position: absolute;
+  border: 3px solid $sencondaryColor;
+  border-radius: 5px;
+  color: $textColor;
+  font-family: arial;
+  background: $sencondaryColor;
+  font-size: 11pt;
+  opacity: $guiOpacity;
 }
 
-#footer {
-    height: $footerHeight;
+.gui.sidebar {
+  top: 10px;
+  left: 10px;
+  width: 350px;
+  max-height: 90%;
+  overflow: auto;
 }
 
-#footer-content {
-    border: 1px solid $sencondaryColor;
-    height: $footerHeight - ($footerPadding + $headerPadding) - ($footerBorder + $headerBorder);
-    padding: 8px;
-    background-color: $sencondaryColor;
-    text-align: right;
+.gui.circle {
+  border-radius: 50%;
 }
 
-#header {
-    vertical-align: text-top;
-    height: $headerHeight;
+.gui.circle.button {
+  top: 10px;
+  width: $buttonRadius;
+  height: $buttonRadius;
 }
 
-#header-content {
-    vertical-align: text-top;
-    border: 1px solid $sencondaryColor;
-    height: $headerHeight - ($footerPadding + $headerPadding) - ($footerBorder + $headerBorder);
-    padding: 8px;
-    background-color: $sencondaryColor;
+.gui.circle.button:hover {
+  -webkit-box-shadow: inset 3px 3px 4px #000;
+  -moz-box-shadow: inset 3px 3px 4px #000;
+  box-shadow: inset 3px 3px 4px #000;
+}
+
+.gui.circle.button.add {
+  right: 2 * $buttonDivider + $buttonRadius;
+}
+
+.gui.circle.button.open {
+  right: 3 * $buttonDivider + 2 * $buttonRadius;
+}
+
+.gui.circle.button.info {
+  right: $buttonDivider;
+}
+
+.buttonImage {
+  width: 100%;
+  border-radius: 50%;
+}
+
+#topBar {
+  margin-top: 0;
+  width: 100%;
+}
+
+#hideButton {
+  float: right;
+}
+
+#titleSpan {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#topLeft, #topRight {
+  float: left;
+  margin-top: 0;
+  top:-20px;
+}
+
+#topLeft {
+  width: 80%;
+  background: #ff0000;
+}
+
+#topRight {
+  width: 20%;
+  background: #00ff00;
 }
 
 #content {
-    height: 100%;
+  max-height: 80%;
+  overflow:auto;
 }
 
-#sidebar {
-    border: 1px solid $sencondaryColor;
-    width: $sidebarWidth;
-    position: absolute;
-    left: 0;
-    top: $headerHeight;
-    bottom: $footerHeight;
-    background-color: $sencondaryColor;
+#bottomBar {
+  text-align: center;
 }
 
-#main {
-    margin-left: $sidebarWidth;
+
+.hideButton {
+  float: right;
+  width: 24px;
+  height: 24px;
+}
+
+.nextButton{
+  width: 36px;
+  height: 24px;
+}
+
+.previousButton {
+  width: 36px;
+  height: 24px;
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+
+.stageNumbers {
 }

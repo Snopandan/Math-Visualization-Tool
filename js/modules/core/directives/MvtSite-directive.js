@@ -3,17 +3,13 @@ CoreModule.directive('mvtSite', ['MultiTransclude', function(MultiTransclude) {
     restrict: 'E',
     scope: {},
     transclude: true,
-    template: '<div id="wrapper">' +
-                '<div id="header"><div transclude-id="header" id="header-content"></div></div>' +
-                '<div id="content">' +
-                '<div id="sidebar" transclude-id="sidebar"></div>' +
-                '<div id="main" transclude-id="main">' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '<div id="footer">' +
-                '<div id="footer-content" transclude-id="footer"></div>' +
-                '</div>',
+    template: '<div transclude-id="main"></div>'+
+              '<div class="gui sidebar">'+
+                '<div id="content" transclude-id="gui-content"></div>'+
+              '</div>' +
+              '<div title="Open a visualization" class="gui circle button open"><img class="buttonImage" src="images/icons/open.png" /></div>' +
+              '<div title="Create a new visualization" class="gui circle button add"><img class="buttonImage" src="images/icons/add.png" /></div>' +
+              '<div title="Information about this application" class="gui circle button info"><img class="buttonImage" src="images/icons/info.png" /></div>',
     link: function(scope, element, attributes, controller, transclude) {
       MultiTransclude.transclude(element, transclude);
     }
