@@ -116,3 +116,18 @@
 
 .stageNumbers {
 }
+
+.overlay {
+  position: absolute;
+  z-index: 10;
+  background-color: $sencondaryColor;
+  height: 80%;
+  width: 80%;
+  top: 10%;
+  left: 10%;
+  border: 10px solid $sencondaryColor;
+  border-radius: 10px;
+  color: $textColor;
+  font-family: arial;
+  font-size: 11pt;
+}
