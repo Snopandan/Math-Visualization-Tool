@@ -1,0 +1,10 @@
+<mvt-site >
+  <div transclude-to="main"><render-window></render-window></div>
+  <div transclude-to="gui-content">
+    <gui-component next-callback="viz.next" previous-callback="viz.previous" title="viz.name" current-stage="viz.currentStage" max-stage="viz.finalStage">
+      <div transclude-to="content">
+        <div ng-bind-html="viz.currentDescription | SanitizeHtml"></div>
+      </div>
+    </gui-component>
+  </div>
+</mvt-site>

@@ -1,6 +1,5 @@
-function VisualizationCtrl($http, RenderWindow, VisualizationCollection) {
+function VisualizationCtrl($routeParams, $http, RenderWindow, VisualizationCollection) {
   var that = this;
-
   that.currentStage = 1;
   that.finalStage = 1;
   that.name = "";
@@ -60,4 +59,4 @@ function VisualizationCtrl($http, RenderWindow, VisualizationCollection) {
   }
 }
 
-CoreModule.controller('VisualizationCtrl', ['$http', 'RenderWindow', 'VisualizationCollection', VisualizationCtrl]);
+CoreModule.controller('VisualizationCtrl', ['$routeParams', '$http', 'RenderWindow', 'VisualizationCollection', VisualizationCtrl]);
