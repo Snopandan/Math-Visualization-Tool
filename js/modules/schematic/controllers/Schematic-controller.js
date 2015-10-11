@@ -1,0 +1,3 @@
+SchematicModule.controller('SchematicCtrl', [function() {
+
+}]);

@@ -6,7 +6,9 @@ mathVisualizationTool.config(['$routeProvider', function($routeProvider) {
         controllerAs: 'viz'
       }).
       when('/schematic', {
-        templateUrl: 'views/schematic.html'
+        templateUrl: 'views/schematic.html',
+        controller: 'SchematicCtrl',
+        controllerAs: 'schematic'
       }).
       otherwise({
         redirectTo: '/visualization/open'

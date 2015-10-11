@@ -1,1 +1,1 @@
-var CoreModule = angular.module('CoreModule', ['ngResource', 'ngRoute', 'VisualizationModule', 'GraphicsModule', 'MathModule']);
+var CoreModule = angular.module('CoreModule', ['ngResource', 'ngRoute', 'VisualizationModule', 'GraphicsModule', 'MathModule', 'SchematicModule']);
