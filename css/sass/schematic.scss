@@ -19,3 +19,13 @@ $opacity: 0.2;
   min-width: 100%;
   background-size:50px 50px;
 }
+
+.draggable {
+  background-color: $sencondaryColor;
+  position:  absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+  border: 2px  solid rgba(0,0,0,0.5);
+    border-radius: 4px; padding: 8px;
+}

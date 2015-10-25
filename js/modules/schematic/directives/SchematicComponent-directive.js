@@ -1,10 +1,11 @@
-SchematicModule.directive('schematicComponent', function() {
+SchematicModule.directive('schematicComponent', ['MultiTransclude', function(MultiTransclude) {
   return {
     restrict: 'E',
     scope: {},
-    template: '<div draggable="true" class="draggable" id="draggable">Drag me!<button>hej</button></div>',
-    link: function(scope, element, attributes, controller) {
-      console.log(element);
+    transclude: true,
+    template: '<div transclude-id="content" draggable="true" class="draggable" id="draggable"></div>',
+    link: function(scope, element, attributes, controller, transclude) {
+      MultiTransclude.transclude(element, transclude);
 
       var dragComponent = element.children()[0];
       var draggingMe = false;
@@ -39,4 +40,4 @@ SchematicModule.directive('schematicComponent', function() {
 
     }
   };
-});
+}]);

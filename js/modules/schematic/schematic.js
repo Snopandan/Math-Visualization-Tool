@@ -1,1 +1,1 @@
-var SchematicModule = angular.module('SchematicModule', []);
+var SchematicModule = angular.module('SchematicModule', ['CoreModule']);

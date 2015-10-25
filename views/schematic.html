@@ -1,3 +1,7 @@
 <div class="schematicWrapper">
-  <div class="schematicContent"></div>
+  <div class="schematicContent">
+    <button ng-click="schematic.addComponent()">add</button>
+    <schematic-component><nested-component transclude-to="content"></nested-component></schematic-component>
+    <schematic-component></schematic-component>
+  </div>
 </div>
