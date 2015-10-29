@@ -1,7 +1,25 @@
+<div class="schematicSidebar">
+  <div class="schematicStageBar">
+
+  </div>
+  <div class="schematicVariableBar">
+
+  </div>
+</div>
 <div class="schematicWrapper">
   <div class="schematicContent">
     <button ng-click="schematic.addComponent()">add</button>
-    <schematic-component><nested-component transclude-to="content"></nested-component></schematic-component>
-    <schematic-component></schematic-component>
+    <schematic-component>
+      <div transclude-to="content">
+        <anchor position="left" text="1"></anchor>
+        <anchor position="right" text="2"></anchor>
+        <br>
+        <br>
+        <anchor position="left" text="3"></anchor>
+        <anchor position="right" text="4"></anchor>
+      </div>
+      <!-- <nested-component transclude-to="content"></nested-component> -->
+    </schematic-component>
+    <!-- <schematic-component></schematic-component> -->
   </div>
 </div>

@@ -6,7 +6,9 @@ $opacity: 0.2;
   margin: 0;
   padding: 0;
   height: 100%;
-  width: 100%;
+  width: 80%;
+  float: right;
+  left: 20%;
   position: absolute;
   background-color: $primaryColor;
   background-image:linear-gradient($primaryColor, $primaryColor);
@@ -27,5 +29,48 @@ $opacity: 0.2;
   top: 0;
   width: 200px;
   border: 2px  solid rgba(0,0,0,0.5);
-    border-radius: 4px; padding: 8px;
+  border-radius: 4px; padding: 8px;
+}
+
+.anchorOuter {
+  background-color: #ff0000;
+  border-radius: 50%;
+	width: 16px;
+	height: 16px;
+  position: relative;
+  cursor: pointer;
+}
+
+.anchorInner {
+  background-color: $sencondaryColor;
+  border-radius: 50%;
+	width: 10px;
+	height: 10px;
+  position:absolute;
+  top: 3px;
+  left: 3px;
+}
+
+.anchorText {
+}
+
+.anchorWrapper {
+  width: 100%;
+}
+
+.schematicSidebar {
+  width: 20%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  position: absolute;
+  background-color: $sencondaryColor;
+}
+
+.schematicStageBar {
+  height: 50%;
+}
+
+.schematicVariableBar {
+  height: 50%;
 }
