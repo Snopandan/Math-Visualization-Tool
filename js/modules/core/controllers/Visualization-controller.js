@@ -1,4 +1,4 @@
-function VisualizationCtrl($routeParams, $http, RenderWindow, VisualizationCollection) {
+function VisualizationCtrl($routeParams, $http, RenderWindow, VisualizationCollection, AssignmentComponent, NumberVariable, GetVariableComponent) {
   var that = this;
   that.currentStage = 1;
   that.finalStage = 1;
@@ -7,7 +7,39 @@ function VisualizationCtrl($routeParams, $http, RenderWindow, VisualizationColle
   that.currentVisualizationId = 0;
   that.visualizations = [];
   var currentVisualization;
+  ////////////////////////////////
+  var num10 = NumberVariable('hej', 10);
+  var num5 = NumberVariable('hej', 5);
 
+  var get = GetVariableComponent(num5);
+  var comp = AssignmentComponent(num10, get);
+
+  console.log('num10 = ' + num10.getValue());
+  console.log('num5 = ' + num5.getValue());
+  comp.resolve();
+  console.log('num10 = ' + num10.getValue());
+  console.log('num5 = ' + num5.getValue());
+
+
+
+  // var dep1 = AssignmentComponent();
+  //
+  // dep1.setFun(function(){
+  //   console.log('hej this is dep1');
+  // });
+  //
+  // var dep2 = AssignmentComponent();
+  //
+  // dep2.setFun(function(){
+  //   console.log('hej this is dep2');
+  // });
+
+  // comp.addDependency(dep1);
+  // comp.addDependency(dep2);
+  //
+  // comp.resolve();
+
+  ///////////////////////////////
   that.changeCurrentVisualization = function() {
     currentVisualization = that.visualizations[that.currentVisualizationId];
     currentVisualization.setStage(0);
@@ -59,4 +91,4 @@ function VisualizationCtrl($routeParams, $http, RenderWindow, VisualizationColle
   }
 }
 
-CoreModule.controller('VisualizationCtrl', ['$routeParams', '$http', 'RenderWindow', 'VisualizationCollection', VisualizationCtrl]);
+CoreModule.controller('VisualizationCtrl', ['$routeParams', '$http', 'RenderWindow', 'VisualizationCollection', 'AssignmentComponent', 'NumberVariable', 'GetVariableComponent', VisualizationCtrl]);
