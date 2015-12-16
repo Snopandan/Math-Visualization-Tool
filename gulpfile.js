@@ -24,7 +24,9 @@ gulp.task('build-js', ['clean'], function() {
   return gulp.src(inputFiles.js)
     .pipe(sourcemaps.init())
     .pipe(concat(jsOutputFileName))
-    .pipe(uglify())
+    .pipe(uglify().on('error', function(e) {
+      console.log(e);
+    }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(outputFiles.js));
 });
