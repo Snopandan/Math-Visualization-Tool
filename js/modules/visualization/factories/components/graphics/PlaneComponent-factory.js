@@ -2,10 +2,10 @@ VisualizationModule.factory('PlaneComponent', ['Component', 'Plane', function(Co
   var PlaneComponent = function(variable, value) {
     var that = Component();
 
-    normal_ =
-    showNormal_ =
-    size_ =
-    gridStep_ =
+    // normal_ =
+    // showNormal_ =
+    // size_ =
+    // gridStep_ =
 
     return that;
   };
