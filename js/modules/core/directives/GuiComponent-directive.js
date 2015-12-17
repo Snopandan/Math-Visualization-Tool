@@ -7,11 +7,17 @@ CoreModule.directive('guiComponent', ['MultiTransclude', function(MultiTransclud
       title: '=',
       maxStage: '=',
       currentStage: '=',
-      asfasf: '='
+      asfasf: '=',
+      nextVizCallback: '=',
+      previousVizCallback: '='
     },
     transclude: true,
     template: '<div id="topBar">' +
-                '<span id="titleSpan">{{title}}</span> <img id="hideButton" ng-click="clickHide()" class="hideButton" src="images/icons/eye_open.png"/>' +
+                '<span id="titleSpan">{{title}}' +
+                '<span id="leftBottomSpan"><img id="previousButton" class="previousButton" ng-click="previousVizCallback()" src="images/icons/arrow_disabled.png"/></span>' +
+                '---'+
+                '<span id="rightBottomSpan"><img id="nextButton" class="nextButton" ng-click="nextVizCallback()" src="images/icons/arrow.png"/></span>' +
+                '<img id="hideButton" ng-click="clickHide()" class="hideButton" src="images/icons/eye_open.png"/>' +
                 '<hr>' +
               '</div>' +
               '<div ng-show="sidebarVisible" id="content" transclude-id="content"></div>' +

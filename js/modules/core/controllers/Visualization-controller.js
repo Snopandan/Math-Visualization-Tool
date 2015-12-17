@@ -78,6 +78,16 @@ function VisualizationCtrl($routeParams, $http, RenderWindow, VisualizationColle
     that.currentStage--;
   };
 
+  that.nextViz = function() {
+    that.currentVisualizationId++;
+    that.changeCurrentVisualization();
+  };
+
+  that.previousViz = function() {
+    that.currentVisualizationId--;
+    that.changeCurrentVisualization();
+  };
+
   function getCurrentDescription() {
     return currentVisualization.getDescription(that.currentStage);
   }

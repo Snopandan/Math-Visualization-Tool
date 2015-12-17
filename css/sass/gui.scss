@@ -40,7 +40,8 @@
 }
 
 .gui.circle.button.open {
-  right: 3 * $buttonDivider + 2 * $buttonRadius;
+  // right: 3 * $buttonDivider + 2 * $buttonRadius;
+  right: $buttonDivider;
 }
 
 .gui.circle.button.info {

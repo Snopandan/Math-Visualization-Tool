@@ -1,4 +1,4 @@
-VisualizationModule.factory('VisualizationParser', ['Visualization', 'Stage', 'Vector', 'Plane', 'Vec3', 'DirectionalLight', function(Visualization, Stage, Vector, Plane, Vec3, DirectionalLight) {
+VisualizationModule.factory('VisualizationParser', ['Visualization', 'Stage', 'Vector', 'Plane', 'Vec3', 'DirectionalLight', 'ParametricGeometry', 'ParametricSurface', function(Visualization, Stage, Vector, Plane, Vec3, DirectionalLight, ParametricGeometry, ParametricSurface) {
   var VisualizationParser = function() {
     var that = {};
 
@@ -38,6 +38,14 @@ VisualizationModule.factory('VisualizationParser', ['Visualization', 'Stage', 'V
                 case 'DirectionalLight':
                   stage.add(DirectionalLight(convertJsonSpec(contentObject[j].spec)));
                   console.log("added light");
+                break;
+                case 'ParametricGeometry':
+                  stage.add(ParametricGeometry(convertJsonSpec(contentObject[j].spec)));
+                  console.log('Added ParametricGeometry');
+                break;
+                case 'ParametricSurface':
+                  stage.add(ParametricSurface(convertJsonSpec(contentObject[j].spec)));
+                  console.log('Added ParametricSurface');
                 break;
                 default:
                   console.log('Could not recognize type ' + content[j].type);
